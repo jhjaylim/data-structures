@@ -5,11 +5,8 @@ var Stack = function() {
   var stack = {};
   stack.storage = {};
   stack = _.extend(stack, stackMethods);
-  console.log(stack);
   return stack;
-
 };
-
 
 var stackMethods = {
   push: function(value) {
@@ -29,32 +26,4 @@ var stackMethods = {
     return count;
   }
 };
-
-/*var stackMethods = {};
-
-stackMethods.storage = {};
-
-stackMethods.push = function(value) {
-  console.log(this.storage);
-  this.storage[this.size()] = value;
-};
-
-stackMethods.pop = function() {
-  var result = this.storage[this.size() - 1];
-  delete this.storage[this.size() - 1];
-  return result;
-
-};
-
-stackMethod.size = function() {
-  var count = 0;
-  for (var i in this.storage) {
-    count++;
-  }
-  return count;
-
-};
-
-*/
-
 
