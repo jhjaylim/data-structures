@@ -5,71 +5,68 @@ var BinarySearchTree = function(value) {
 
 // methods: insert, contains, depthFirstLog
 
-  var tree = {};
+  var tree = Object.create(BinarySearchTree.prototype);
   tree.value = value;
   tree.left = null;
   tree.right = null;
-
-
-  return tree; //
+  return tree; 
 };
 
 BinarySearchTree.prototype.insert = function(value) {
-  var BSTree = BinarySearchTree(value);
-  // inputs: values;
-  // outputs: we dont have output
 
-  // contrains: binary tree form. 
-  // edge: do not overwrite value
-  
-
-  // comapre this.value and value and see if we need to left or right
-  var comparison = this.value < value ? 1 : -1;   
-  // base case
-
+  var comparison = this.value < value ? 1 : -1; // compare this.value and value and see if we need to left or right
+    
   if (comparison > 0 ) { // right
-    // base case
-    if (this.left === null) {
-      this.left = BSTree;
-    } else {
-      this.left.insert(value);
+    if (this.right === null) { // base case
+      this.right = BinarySearchTree(value); // set right of this to new branch 
+    } else { //otherwise recurse
+      this.right.insert(value); // call this function on (value, this object.left)
     }
+  }  
 
-    // recurse case
+  if (comparison < 0) { // left 
+    if (this.left === null) { 
+      this.left = BinarySearchTree(value); 
+    } else { 
+      this.left.insert(value); 
+    }   
+  }
 
+};
 
+BinarySearchTree.prototype.contains = function(value) {
+  if (this.value === value ) {
+    return true;
   } 
   
-  
-  
-  // compare the value with this.value; 
-  if (comparison < 0) {//left
-    //base
-
-    // recurse    
-
+  var comparison = value > this.value ? 1 : -1; // comparison: if current branch value is less than passed in value;
+  if (comparison > 0) {
+    if (!this.right) {  // if that to right does not exist;
+      return false;
+    } else {  
+      return this.right.contains(value); // recurse through to the right 
+    }
+  } else if (comparison < 0) {
+    if (!this.left) {
+      return false;
+    } else {
+      return this.left.contains(value); // recurse through to the left
+    }
   }
+  return false;
+};
+
+BinarySearchTree.prototype.depthFirstLog = function(callback) {
   
-      //then when this.left or right.value = undefined
-      // set to left of right depending on comaprison of values   
-
-  // recursion case
-    // somehow we know that new tree goes right
-    // if statement with to do when left;
-      // this.left = BSTree;
-    // somehow we know that new tree goes to left
+  callback(this.value); //run the callback on current value;
+  //recurse cases..
+  if (this.left) { //if that left exists 
+    this.left.depthFirstLog(callback); //recursively run the callback on the current left branch;
+  }
+  if (this.right) {
+    this.right.depthFirstLog(callback);
+  }
 };
-
-BinarySearchTree.prototype.contains = function() {
-
-
-};
-
-BinarySearchTree.prototype.depthFirstLog = function() {
-
-
-};
-
 
 
 
