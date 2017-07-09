@@ -12,7 +12,7 @@ var BinarySearchTree = function(value) {
   return tree; 
 };
 
-BinarySearchTree.prototype.insert = function(value) {
+BinarySearchTree.prototype.insert = function(value) { // O(log n)
 
   var comparison = this.value < value ? 1 : -1; // compare this.value and value and see if we need to left or right
     
@@ -34,7 +34,7 @@ BinarySearchTree.prototype.insert = function(value) {
 
 };
 
-BinarySearchTree.prototype.contains = function(value) {
+BinarySearchTree.prototype.contains = function(value) { // O(log n)
   if (this.value === value ) {
     return true;
   } 
@@ -56,7 +56,7 @@ BinarySearchTree.prototype.contains = function(value) {
   return false;
 };
 
-BinarySearchTree.prototype.depthFirstLog = function(callback) {
+BinarySearchTree.prototype.depthFirstLog = function(callback) { // O(n)
   
   callback(this.value); //run the callback on current value;
   //recurse cases..
@@ -67,10 +67,6 @@ BinarySearchTree.prototype.depthFirstLog = function(callback) {
     this.right.depthFirstLog(callback);
   }
 };
-
-
-
-
 
 
 /*
